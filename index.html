@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>clairine Artspace — Portofolio Pelukis</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ===================================================
+     NAVBAR
+==================================================== -->
+    <nav id="mainNav">
+      <div class="nav-logo">Clairine Artspace</div>
+      <ul class="nav-links">
+        <li><a href="#hero">Beranda</a></li>
+        <li><a href="#about">Tentang</a></li>
+        <li><a href="#gallery">Galeri</a></li>
+        <li><a href="#contact">Kontak</a></li>
+      </ul>
+      <button class="nav-admin-btn" onclick="window.location.href='admin.html'">Dashboard Admin</button>
+      <button class="nav-hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+    </nav>
+
+    <!-- ===================================================
+     HERO
+==================================================== -->
+    <section id="hero">
+      <div class="hero-blob hero-blob-1"></div>
+      <div class="hero-blob hero-blob-2"></div>
+      <div class="hero-blob hero-blob-3"></div>
+
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="hero-badge">Pelukis Independen · Batu Malang</div>
+          <h1 class="hero-title">
+            Di setiap goresan,<br />
+            ada cerita yang <span>tak mampu diucapkan kata-kata.</span>
+          </h1>
+          <!--<div class="hero-ctas">
+            <a href="#gallery" class="btn-primary"> Lihat Karya Saya</a>
+            <a href="#contact" class="btn-secondary"> Hubungi Saya</a>
+          </div>-->
+        </div>
+
+        <!-- PENGUBAHAN AREA AVATAR MENJADI SLIDER KARYA -->
+        <div class="hero-image-wrap">
+          <div class="hero-avatar slider-container">
+            <div class="slider-wrapper" id="heroSliderWrapper">
+              <!-- Diisi oleh renderHeroSlider() di app.js -->
+            </div>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-card">
+              <div>
+                <div class="stat-num" id="heroStatArtworks">48</div>
+                <div class="stat-label">Karya Selesai</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div>
+                <div class="stat-num">5th</div>
+                <div class="stat-label">Tahun Berkarya</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+     ABOUT
+==================================================== -->
+    <section id="about">
+      <div class="about-grid">
+        <div class="about-img-wrap">
+          <img src="media/profil/profil.png" alt="Clairine" class="about-img" />
+
+          <div class="paint-palette">🎨</div>
+          <div class="paint-brush">🖌️</div>
+
+          <div class="about-deco"></div>
+          <div class="about-deco-2"></div>
+        </div>
+
+        <div>
+          <div class="section-header">
+            <div class="section-label">Tentang Saya</div>
+            <h2 class="section-title">Seni Sebagai <em>Cara Bicara</em></h2>
+          </div>
+
+          <p class="about-bio" id="aboutBio">Halo! Saya Clairine...</p>
+
+          <p class="about-bio">Saya percaya seni bukan sekadar dekorasi...</p>
+
+          <div class="about-tags" id="aboutTags">
+            <span class="tag">Cat Minyak</span>
+            <span class="tag">Akril</span>
+            <span class="tag">Cat Air</span>
+            <span class="tag">Seni Digital</span>
+            <span class="tag">Potret</span>
+            <span class="tag">Pemandangan</span>
+          </div>
+
+          <div class="social-links">
+            <a href="https://www.instagram.com/k0kofish._?igsh=MTJoNXp2ZXBlMGtrNw==" class="social-btn instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+
+            <a href="https://www.tiktok.com/@xiiaoo_?_r=1&_t=ZS-97XH7OoSuF5" class="social-btn tiktok">
+              <i class="fab fa-tiktok"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+     GALLERY
+==================================================== -->
+    <section id="gallery">
+      <div class="section-header centered">
+        <div class="section-label">Portofolio</div>
+        <h2 class="section-title">Galeri <em>Karya Saya</em></h2>
+        <p class="section-desc">Jelajahi koleksi karya dari berbagai medium dan tema. Setiap karya adalah cerita yang menunggu untuk ditemukan.</p>
+      </div>
+
+      <div class="gallery-filters" id="galleryFilters">
+        <button class="filter-btn active" data-cat="semua" onclick="filterGallery(this)">Semua</button>
+        <button class="filter-btn" data-cat="lukisan" onclick="filterGallery(this)">Lukisan</button>
+        <button class="filter-btn" data-cat="sketsa" onclick="filterGallery(this)">Sketsa</button>
+        <button class="filter-btn" data-cat="digital" onclick="filterGallery(this)">Digital</button>
+        <button class="filter-btn" data-cat="cat air" onclick="filterGallery(this)">Cat Air</button>
+      </div>
+
+      <!-- Diisi oleh renderGallery() di app.js -->
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <div class="section-divider">
+      <span></span>
+
+      <div class="divider-icon">
+        <i class="fa-solid fa-phone"></i>
+      </div>
+
+      <span></span>
+    </div>
+
+    <!-- ===================================================
+     CONTACT
+==================================================== -->
+    <section id="contact">
+      <div class="section-header centered">
+        <h2 class="section-title">Mari <em>Berkolaborasi!</em></h2>
+        <p class="section-desc">Tertarik dengan karya saya? Punya projek yang ingin didiskusikan? Jangan sungkan menghubungi saya!</p>
+      </div>
+
+      <div class="contact-wrap">
+        <!-- Info -->
+        <div class="contact-info-card">
+          <!-- Email -->
+          <div class="contact-item email">
+            <div class="contact-icon">
+              <i class="fa-brands fa-google"></i>
+            </div>
+            <div>
+              <div class="contact-label">EMAIL</div>
+              <div class="contact-val" id="contactEmail">clairin@example.com</div>
+            </div>
+          </div>
+
+          <!-- Lokasi -->
+          <div class="contact-item location">
+            <div class="contact-icon">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div>
+              <div class="contact-label">LOKASI</div>
+              <div class="contact-val" id="contactLoc">Batu Malang, Indonesia</div>
+            </div>
+          </div>
+
+          <!-- Jam -->
+          <div class="contact-item clock">
+            <div class="contact-icon">
+              <i class="fa-regular fa-clock"></i>
+            </div>
+            <div>
+              <div class="contact-label">JAM KERJA</div>
+              <div class="contact-val">Sen–Jum • 09:00–17:00</div>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <a href="https://www.instagram.com/k0kofish._?igsh=MTJoNXp2ZXBlMGtrNw==" class="social-btn instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+
+            <a href="https://www.tiktok.com/@xiiaoo_?_r=1&_t=ZS-97XH7OoSuF5" class="social-btn tiktok">
+              <i class="fab fa-tiktok"></i>
+            </a>
+          </div>
+        </div>
+        <!-- Form -->
+        <div class="contact-form-card">
+          <h3 class="contact-form-title">Kirim Pesan</h3>
+
+          <div class="form-group">
+            <label class="form-label">Nama Lengkap</label>
+            <input id="nama" type="text" class="form-input" placeholder="Nama kamu..." required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input id="email" type="email" class="form-input" placeholder="email@kamu.com" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Pesan</label>
+            <textarea id="pesan" class="form-textarea" placeholder="Ceritakan projek atau pertanyaanmu..." required></textarea>
+          </div>
+
+          <button id="sendBtn" class="btn-primary" onclick="sendContact()" style="width: 100%; display: block; text-align: center">✉️ Kirim Pesan</button>
+
+          <div id="notif" class="contact-notif"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+     FOOTER
+==================================================== -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-logo">🎨 Clairine Artspace</div>
+        <ul class="footer-links">
+          <li><a href="#hero">Beranda</a></li>
+          <li><a href="#about">Tentang</a></li>
+          <li><a href="#gallery">Galeri</a></li>
+          <li><a href="#contact">Kontak</a></li>
+        </ul>
+      </div>
+      <div class="footer-copy">© 2026 clairine Artspace · Dibuat dengan ❤️ dan banyak cat</div>
+    </footer>
+
+    <!-- ===================================================
+     ARTWORK DETAIL MODAL
+==================================================== -->
+    <div class="modal-overlay" id="artworkModal" onclick="closeModalOnBg(event)">
+      <div class="modal" id="artworkModalContent">
+        <div class="modal-header" id="modalHeader">
+          <div id="modalEmoji" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:6rem;pointer-events:none;">🖼️</div>
+          <div class="modal-wm-overlay"><span id="modalWmText">© Clairine-art</span></div>
+          <button class="modal-close" onclick="closeModal()" style="pointer-events:all;z-index:200;">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-cat" id="modalCat">LUKISAN</div>
+          <h2 class="modal-title" id="modalTitle">Judul Karya</h2>
+          <p class="modal-desc" id="modalDesc">Deskripsi karya.</p>
+          <div class="modal-specs">
+            <div class="spec-item">
+              <div class="spec-key">Tahun</div>
+              <div class="spec-val" id="modalYear">2024</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-key">Media</div>
+              <div class="spec-val" id="modalMedia">Cat Minyak</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-key">Dimensi</div>
+              <div class="spec-val" id="modalSize">60×80 cm</div>
+            </div>
+          </div>
+          <div class="modal-actions">
+            <div id="modalStatus"></div>
+            <button class="btn-like" id="modalLikeBtn" onclick="likeArtwork()">❤️ Suka <span id="modalLikeCount">0</span></button>
+            <button class="btn-share" onclick="shareArtwork()">🔗 Bagikan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================
+     TOAST
+==================================================== -->
+    <div class="toast" id="toast">✅</div>
+
+    <!-- Retro Success Popup -->
+    <div id="pixelPopup" class="pixel-popup">
+      <div class="pixel-popup-box">
+        <div class="pixel-check">✔</div>
+
+        <h2>Pesan Terkirim!</h2>
+
+        <p>
+          Terima kasih telah menghubungi saya.<br />
+          Saya akan membalas secepat mungkin.
+        </p>
+
+        <button onclick="closePixelPopup()">OK</button>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

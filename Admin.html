@@ -1,0 +1,999 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard — Clairine Artspace</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+    <!-- Styles -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+      /* ==============================================
+   clairine ARTSPACE — style.css (PIXEL ART EDITION)
+============================================== */
+
+      :root {
+        /* Saweria-pixel palette */
+        --px-yellow: #ffd166;
+        --px-orange: #ff8c42;
+        --px-pink: #ff6b9d;
+        --px-teal: #4ecdc4;
+        --px-sky: #4cc9f0;
+        --px-mint: #06d6a0;
+        --px-purple: #9b5de5;
+        --px-red: #f15bb5;
+        --px-ink: #1a1a2e;
+        --px-dark: #16213e;
+        --px-muted: #6b6b8a;
+        --px-cream: #fffbf0;
+        --px-white: #ffffff;
+        --px-border: #ffe5d0;
+
+        /* Pixel borders & shadows */
+        --pixel-border: 4px solid var(--px-ink);
+        --pixel-border-sm: 2.5px solid var(--px-ink);
+        --pixel-shadow: 6px 6px 0px var(--px-ink);
+        --pixel-shadow-sm: 4px 4px 0px var(--px-ink);
+
+        --transition: all 0.1s steps(1);
+      }
+
+      /* ============================================
+   2. RESET & BASE + PATTERN BG
+============================================ */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        font-family: 'Nunito', sans-serif;
+        background-color: var(--px-cream);
+        color: var(--px-ink);
+        overflow-x: hidden;
+        background-image: radial-gradient(circle, rgba(255, 140, 66, 0.15) 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+
+      .px-font {
+        font-family: 'Press Start 2P', monospace;
+        line-height: 1.6;
+      }
+
+      /* Shared Buttons */
+      .btn-primary,
+      .btn-secondary {
+        font-family: 'Press Start 2P', monospace;
+        font-size: 0.65rem;
+        padding: 14px 20px;
+        border: var(--pixel-border);
+        box-shadow: var(--pixel-shadow);
+        cursor: pointer;
+        transition: var(--transition);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        letter-spacing: 0.5px;
+      }
+
+      .btn-primary {
+        background: var(--px-orange);
+        color: var(--px-white);
+      }
+
+      .btn-primary:hover {
+        transform: translate(4px, 4px);
+        box-shadow: 2px 2px 0 var(--px-ink);
+        background: var(--px-pink);
+      }
+
+      .btn-secondary {
+        background: var(--px-white);
+        color: var(--px-ink);
+      }
+
+      .btn-secondary:hover {
+        transform: translate(4px, 4px);
+        box-shadow: 2px 2px 0 var(--px-ink);
+        background: var(--px-yellow);
+      }
+
+      /* Forms styling */
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-label {
+        font-family: 'Press Start 2P', monospace;
+        font-size: 0.55rem;
+        color: var(--px-ink);
+        margin-bottom: 8px;
+        display: block;
+        letter-spacing: 0.5px;
+      }
+
+      .form-input,
+      .form-textarea,
+      .form-select {
+        width: 100%;
+        padding: 12px 14px;
+        border: var(--pixel-border);
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--px-ink);
+        background: var(--px-white);
+        outline: none;
+        transition: var(--transition);
+      }
+
+      .form-input:focus,
+      .form-textarea:focus,
+      .form-select:focus {
+        background: var(--px-yellow);
+        box-shadow: var(--pixel-shadow-sm);
+      }
+
+      .form-textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      /* ============================================
+   12. ADMIN LOGIN
+============================================ */
+      #admin-login {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        background: var(--px-pink);
+        background-image: repeating-conic-gradient(rgba(0, 0, 0, 0.06) 0% 25%, transparent 0% 50%);
+        background-size: 32px 32px;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      #admin-login.show {
+        display: flex;
+      }
+
+      .login-box {
+        background: var(--px-white);
+        border: var(--pixel-border);
+        box-shadow: 10px 10px 0 var(--px-ink);
+        padding: 40px 32px;
+        width: 100%;
+        max-width: 420px;
+      }
+
+      .login-icon {
+        font-size: 3rem;
+        margin-bottom: 12px;
+        text-align: center;
+      }
+
+      .login-title {
+        font-family: 'Press Start 2P', monospace;
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+        text-align: center;
+      }
+
+      .login-sub {
+        color: var(--px-muted);
+        font-size: 0.85rem;
+        margin-bottom: 24px;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .login-err {
+        color: var(--px-red);
+        font-family: 'Press Start 2P', monospace;
+        font-size: 0.5rem;
+        margin-bottom: 16px;
+        display: none;
+        line-height: 1.6;
+        border: var(--pixel-border-sm);
+        background: #fff0f5;
+        padding: 8px;
+      }
+
+      .login-err.show {
+        display: block;
+      }
+
+      /* ============================================
+   13. ADMIN DASHBOARD — Shell
+============================================ */
+      #admin-dashboard {
+        display: none;
+        min-height: 100vh;
+        position: fixed;
+        inset: 0;
+        z-index: 888;
+        overflow-y: auto;
+        background: #f0e8ff;
+        background-image: radial-gradient(circle, rgba(155, 93, 229, 0.1) 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+
+      #admin-dashboard.show {
+        display: block;
+      }
+
+      .dash-nav {
+        background: var(--px-purple);
+        border-bottom: var(--pixel-border);
+        padding: 0 5%;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 900;
+      }
+
+      .dash-logo {
+        font-family: 'Press Start 2P', monospace;
+        font-size: 0.75rem;
+        color: var(--px-yellow);
+        text-shadow: 2px 2px 0 var(--px-ink);
+      }
+
+      .dash-tabs {
+        display: flex;
+        gap: 8px;
+        height: 100%;
+        align-items: flex-end;
+      }
+
+      .dash-tab {
+        padding: 12px 16px;
+        font-family: 'Press Start 2P', monospace;
+        font-size: 0.55rem;
+        border: var(--pixel-border-sm);
+        border-bottom: none;
+        background: rgba(0, 0, 0, 0.15);
+        color: rgba(255, 255, 255, 0.8);
+        cursor: pointer;
+        transition: var(--transition);
+        transform: translateY(4px);
+      }
+
+      .dash-tab.active {
+        background: var(--px-yellow);
+        color: var(--px-ink);
+        transform: translateY(0);
+        padding-top: 16px;
+      }
+
+      .dash-tab:hover:not(.active) {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+      }
+
+      .dash-logout {
+        background: var(--px-pink);
+        border: var(--pixel-border-sm);
+        color: var(--px-ink);
+        box-shadow: 3px 3px 0 var(--px-ink);
+        padding: 8px 14px;
+        font-family: 'Press Start 2P', monospace;
+        font-size: 0.5rem;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .dash-logout:hover {
+        background: var(--px-white);
+        transform: translate(2px, 2px);
+        box-shadow: 1px 1px 0 var(--px-ink);
+      }
+
+      .dash-body {
+        padding: 40px 5%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .dash-section {
+        display: none;
+        animation: pop 0.15s steps(2) forwards;
+      }
+
+      .dash-section.active {
+        display: block;
+      }
+
+      .dash-panel-title {
+        font-family: 'Press Start 2P', monospace;
+        font-size: 1.2rem;
+        margin-bottom: 32px;
+        color: var(--px-ink);
+        position: relative;
+        display: inline-block;
+      }
+
+      .dash-panel-title::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background: var(--px-teal);
+        border: 2px solid var(--px-ink);
+        z-index: -1;
+      }
+
+      /* ============================================
+   14. DASHBOARD PANELS
+============================================ */
+      /* Stats Cards */
+      .dash-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+        margin-bottom: 36px;
+      }
+
+      .dash-stat {
+        background: var(--px-white);
+        border: var(--pixel-border);
+        box-shadow: var(--pixel-shadow-sm);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .dash-stat-num {
+        font-family: 'Press Start 2P', monospace;
+        font-size: 1.8rem;
+        color: var(--px-purple);
+        margin-bottom: 8px;
+      }
+
+      .dash-stat-label {
+        font-size: 0.85rem;
+        color: var(--px-muted);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      /* Drag & Drop Zone */
+      .upload-zone {
+        border: 4px dashed var(--px-purple);
+        padding: 48px 24px;
+        text-align: center;
+        background: var(--px-white);
+        cursor: pointer;
+        transition: var(--transition);
+        margin-bottom: 28px;
+        box-shadow: var(--pixel-shadow-sm);
+      }
+
+      .upload-zone:hover,
+      .upload-zone.drag {
+        border-style: solid;
+        border-color: var(--px-pink);
+        background: rgba(255, 107, 157, 0.05);
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 var(--px-ink);
+      }
+
+      .upload-zone-icon {
+        font-size: 3.5rem;
+        margin-bottom: 16px;
+      }
+
+      .upload-zone-text {
+        font-family: 'Nunito', sans-serif;
+        font-weight: 800;
+        font-size: 1.05rem;
+        color: var(--px-ink);
+      }
+
+      .upload-zone-sub {
+        font-size: 0.8rem;
+        color: var(--px-muted);
+        margin-top: 6px;
+        font-weight: 600;
+      }
+
+      .upload-form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      /* Brutalist Table Management */
+      .artworks-table {
+        background: var(--px-white);
+        border: var(--pixel-border);
+        box-shadow: var(--pixel-shadow-sm);
+      }
+
+      .atable-head {
+        background: var(--px-purple);
+        color: var(--px-white);
+        border-bottom: var(--pixel-border);
+        display: grid;
+        grid-template-columns: 80px 1fr 140px 120px 100px;
+        padding: 14px 20px;
+        font-family: 'Press Start 2P', monospace;
+        font-size: 0.5rem;
+        letter-spacing: 0.5px;
+      }
+
+      .atable-row {
+        display: grid;
+        grid-template-columns: 80px 1fr 140px 120px 100px;
+        padding: 16px 20px;
+        border-bottom: var(--pixel-border-sm);
+        align-items: center;
+        background: var(--px-white);
+      }
+
+      .atable-row:last-child {
+        border-bottom: none;
+      }
+
+      .atable-row:hover {
+        background: #faf5ff;
+      }
+
+      .atable-thumb {
+        width: 50px;
+        height: 50px;
+        border: var(--pixel-border-sm);
+        background: var(--px-cream);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .atable-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        image-rendering: pixelated;
+      }
+
+      .atable-title {
+        font-weight: 800;
+        font-size: 0.95rem;
+        padding-right: 12px;
+      }
+
+      .atable-cat {
+        font-family: 'Press Start 2P', monospace;
+        font-size: 0.5rem;
+        color: var(--px-pink);
+      }
+
+      .atable-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .act-btn {
+        width: 36px;
+        height: 36px;
+        border: var(--pixel-border-sm);
+        cursor: pointer;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        box-shadow: 2px 2px 0 var(--px-ink);
+      }
+
+      .act-btn:hover {
+        transform: translate(2px, 2px);
+        box-shadow: none;
+      }
+
+      .act-edit {
+        background: var(--px-yellow);
+      }
+      .act-del {
+        background: #ffd5d5;
+      }
+      .act-del:hover {
+        background: #ff4a4a;
+        color: white;
+      }
+
+      /* Badges Status */
+      .pub-badge {
+        padding: 6px 10px;
+        font-family: 'Press Start 2P', monospace;
+        font-size: 0.45rem;
+        cursor: pointer;
+        border: var(--pixel-border-sm);
+        display: inline-block;
+        text-align: center;
+        box-shadow: 2px 2px 0 var(--px-ink);
+        transition: var(--transition);
+      }
+
+      .pub-badge:hover {
+        transform: translate(2px, 2px);
+        box-shadow: none;
+      }
+
+      .pub-badge.published {
+        background: var(--px-mint);
+        color: var(--px-ink);
+      }
+      .pub-badge.draft {
+        background: var(--px-muted);
+        color: var(--px-white);
+      }
+
+      /* Watermark Layout Workspace */
+      .wm-editor {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 32px;
+        align-items: start;
+      }
+
+      .wm-form,
+      .wm-preview-wrap {
+        background: var(--px-white);
+        border: var(--pixel-border);
+        padding: 28px;
+        box-shadow: var(--pixel-shadow);
+      }
+
+      .wm-canvas-area {
+        width: 100%;
+        aspect-ratio: 4/3;
+        background: #e2d9f3;
+        border: var(--pixel-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 20px;
+      }
+
+      #wmPreviewText {
+        position: absolute;
+        font-family: 'Press Start 2P', monospace;
+        letter-spacing: 2px;
+        pointer-events: none;
+      }
+
+      .range-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 6px;
+      }
+
+      .range-val {
+        font-family: 'Press Start 2P', monospace;
+        font-size: 0.55rem;
+        color: var(--px-purple);
+      }
+
+      input[type='range'] {
+        width: 100%;
+        accent-color: var(--px-purple);
+        height: 8px;
+        background: var(--px-cream);
+        border: var(--pixel-border-sm);
+        outline: none;
+      }
+
+      /* Profile Panel Layout */
+      .profile-edit-container {
+        background: var(--px-white);
+        border: var(--pixel-border);
+        padding: 32px;
+        box-shadow: var(--pixel-shadow);
+      }
+
+      .profile-edit-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      /* ============================================
+   15. TOAST NOTIFICATION
+============================================ */
+      .toast {
+        position: fixed;
+        bottom: 32px;
+        right: 32px;
+        z-index: 9999;
+        background: var(--px-ink);
+        color: var(--px-yellow);
+        border: var(--pixel-border);
+        box-shadow: 6px 6px 0 var(--px-yellow);
+        padding: 16px 24px;
+        font-family: 'Press Start 2P', monospace;
+        font-size: 0.6rem;
+        line-height: 1.6;
+        transform: translateY(100px);
+        opacity: 0;
+        transition: all 0.2s steps(4);
+      }
+
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      /* Animations */
+      @keyframes pop {
+        from {
+          transform: scale(0.98);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* ============================================
+   16. RESPONSIVE DESIGN
+============================================ */
+      @media (max-width: 960px) {
+        .wm-editor,
+        .profile-edit-grid,
+        .upload-form-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .dash-nav {
+          height: auto;
+          padding: 16px 4%;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .dash-tabs {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .dash-tab {
+          padding: 10px 12px;
+          font-size: 0.45rem;
+          border-bottom: var(--pixel-border-sm);
+        }
+
+        .dash-tab.active {
+          padding-top: 10px;
+        }
+
+        .atable-head,
+        .atable-row {
+          grid-template-columns: 60px 1fr 100px 80px;
+          padding: 12px 14px;
+        }
+
+        .atable-head div:nth-child(3),
+        .atable-row div:nth-child(3) {
+          display: none; /* Sembunyikan kategori di tablet/mobile jika sempit */
+        }
+      }
+
+      @media (max-width: 600px) {
+        .dash-tabs {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 6px;
+        }
+
+        .dash-tab {
+          border-bottom: var(--pixel-border-sm) !important;
+          transform: none !important;
+          text-align: center;
+        }
+
+        .atable-head {
+          display: none; /* Sembunyikan header tabel di mobile view */
+        }
+
+        .atable-row {
+          grid-template-columns: 50px 1fr auto;
+          gap: 12px;
+        }
+
+        .pub-badge {
+          grid-column: span 3;
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===================================================
+     TOAST
+==================================================== -->
+    <div class="toast" id="toast">✅</div>
+
+    <!-- ===================================================
+     ADMIN LOGIN
+==================================================== -->
+    <div id="admin-login" class="show">
+      <div class="login-box">
+        <div class="login-icon">🔐</div>
+        <h2 class="login-title">Admin Login</h2>
+        <p class="login-sub">Masuk ke dashboard pengelolaan karya.</p>
+
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="loginEmail" placeholder="admin@artspace.id" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" id="loginPass" placeholder="••••••••" onkeydown="if (event.key === 'Enter') doLogin();" />
+        </div>
+        <div class="login-err" id="loginErr">Email atau password salah. Coba lagi.</div>
+
+        <button class="btn-primary" onclick="doLogin()" style="width: 100%; text-align: center; display: block; margin-bottom: 12px">Masuk Dashboard →</button>
+        <button style="background: none; border: none; color: var(--muted); font-family: inherit; font-size: 0.88rem; cursor: pointer; width: 100%; text-align: center" onclick="window.location.href = 'index.html'">
+          ← Kembali ke Website
+        </button>
+        <p style="font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 16px">Demo: <strong>admin@artspace.id</strong> / <strong>1234</strong></p>
+      </div>
+    </div>
+
+    <!-- ===================================================
+     ADMIN DASHBOARD
+==================================================== -->
+    <div id="admin-dashboard">
+      <!-- Nav -->
+      <div class="dash-nav">
+        <div class="dash-logo">🎨 Admin Dashboard</div>
+        <div class="dash-tabs">
+          <button class="dash-tab active" onclick="switchDashTab('karya', this)">🖼️ Karya</button>
+          <button class="dash-tab" onclick="switchDashTab('upload', this)">⬆️ Upload</button>
+          <button class="dash-tab" onclick="switchDashTab('watermark', this)">💧 Watermark</button>
+          <button class="dash-tab" onclick="switchDashTab('profil', this)">👤 Profil</button>
+        </div>
+        <button class="dash-logout" onclick="doLogout()">Keluar</button>
+      </div>
+
+      <div class="dash-body">
+        <!-- TAB: KARYA -->
+        <div class="dash-section active" id="tab-karya">
+          <h2 class="dash-panel-title">Kelola Karya</h2>
+          <div class="dash-stats" id="dashStats"></div>
+          <div class="artworks-table">
+            <div class="atable-head">
+              <div>Gambar</div>
+              <div>Judul</div>
+              <div>Kategori</div>
+              <div>Status</div>
+              <div>Aksi</div>
+            </div>
+            <div id="artworkTableBody"></div>
+          </div>
+        </div>
+
+        <!-- TAB: UPLOAD -->
+        <div class="dash-section" id="tab-upload">
+          <h2 class="dash-panel-title">Upload Karya Baru</h2>
+
+          <div class="upload-zone" id="uploadZone" onclick="triggerFileInput()" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropFile(event)">
+            <div class="upload-zone-icon" id="uploadZoneIcon">☁️</div>
+            <div class="upload-zone-text" id="uploadZoneText">Drag &amp; drop gambar di sini, atau klik untuk pilih file</div>
+            <div class="upload-zone-sub" id="uploadZoneSub">Mendukung JPG, PNG, WEBP · Maks. 10MB</div>
+            <input type="file" id="fileInput" accept="image/*" style="display: none" onchange="handleFileSelect(event)" />
+          </div>
+
+          <div class="upload-form-grid">
+            <div class="form-group">
+              <label class="form-label">Judul Karya *</label>
+              <input type="text" class="form-input" id="upTitle" placeholder="cth: Senja di Kota" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Kategori *</label>
+              <select class="form-select" id="upCat">
+                <option value="lukisan">Lukisan</option>
+                <option value="sketsa">Sketsa</option>
+                <option value="digital">Digital</option>
+                <option value="cat air">Cat Air</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Media / Teknik</label>
+              <input type="text" class="form-input" id="upMedia" placeholder="cth: Cat Minyak di Kanvas" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tahun</label>
+              <input type="number" class="form-input" id="upYear" placeholder="2026" value="2026" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Dimensi</label>
+              <input type="text" class="form-input" id="upSize" placeholder="cth: 60×80 cm" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Status Jual</label>
+              <select class="form-select" id="upSell">
+                <option value="available">Tersedia</option>
+                <option value="sold">Terjual</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Deskripsi Karya</label>
+            <textarea class="form-textarea" id="upDesc" placeholder="Ceritakan latar belakang dan makna karya ini..."></textarea>
+          </div>
+
+          <div style="display: flex; gap: 10px; flex-wrap: wrap">
+            <button class="btn-primary" onclick="uploadArtwork()">⬆️ Upload &amp; Watermark Otomatis</button>
+            <button class="btn-secondary" onclick="saveAsDraft()">💾Simpan sebagai Draft</button>
+          </div>
+        </div>
+
+        <!-- TAB: WATERMARK -->
+        <div class="dash-section" id="tab-watermark">
+          <h2 class="dash-panel-title">Editor Watermark</h2>
+          <div class="wm-editor">
+            <div class="wm-form">
+              <div class="form-group">
+                <label class="form-label">Teks Watermark</label>
+                <input type="text" class="form-input" id="wmText" value="© Clairine-art" oninput="updateWmPreview()" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Posisi</label>
+                <select class="form-select" id="wmPos" onchange="updateWmPreview()">
+                  <option value="center">Tengah</option>
+                  <option value="bottom-right">Pojok Kanan Bawah</option>
+                  <option value="diagonal">Diagonal (Tile)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <div class="range-label">
+                  <label class="form-label" style="margin: 0">Opacity</label>
+                  <span class="range-val" id="wmOpacityVal">40%</span>
+                </div>
+                <input
+                  type="range"
+                  id="wmOpacity"
+                  min="10"
+                  max="80"
+                  value="40"
+                  oninput="
+                    updateWmPreview();
+                    document.getElementById('wmOpacityVal').textContent = this.value + '%';
+                  "
+                />
+              </div>
+              <div class="form-group">
+                <div class="range-label">
+                  <label class="form-label" style="margin: 0">Ukuran Teks</label>
+                  <span class="range-val" id="wmSizeVal">18px</span>
+                </div>
+                <input
+                  type="range"
+                  id="wmSize"
+                  min="10"
+                  max="40"
+                  value="18"
+                  oninput="
+                    updateWmPreview();
+                    document.getElementById('wmSizeVal').textContent = this.value + 'px';
+                  "
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Warna Teks</label>
+                <input type="color" id="wmColor" value="#ffffff" oninput="updateWmPreview()" style="width: 60px; height: 36px; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; padding: 2px" />
+              </div>
+              <button class="btn-primary" onclick="saveWatermark()" style="width: 100%; text-align: center; display: block">💾 Simpan Setting Watermark</button>
+              <button
+                onclick="applyWmToAll()"
+                style="margin-top: 10px; width: 100%; display: block; background: none; border: 2px solid var(--border); padding: 10px; border-radius: 99px; font-family: inherit; font-weight: 700; cursor: pointer; color: var(--muted)"
+              >
+                🔄 Terapkan Ulang ke Semua Karya
+              </button>
+            </div>
+
+            <div class="wm-preview-wrap">
+              <h4 style="font-weight: 800; margin-bottom: 16px">Preview Real-time</h4>
+              <div class="wm-canvas-area">
+                <div style="font-size: 4rem; z-index: 0">🖼️</div>
+                <div id="wmPreviewText"></div>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--muted); line-height: 1.5">Seperti inilah watermark akan tampil di karya yang dipublikasikan.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: PROFIL -->
+        <div class="dash-section" id="tab-profil">
+          <h2 class="dash-panel-title">Edit Profil &amp; Konten</h2>
+          <div style="background: white; border-radius: var(--radius-md); padding: 28px; border: 2px solid #e8dcff">
+            <div class="profile-edit-grid">
+              <div class="form-group">
+                <label class="form-label">Nama Pelukis</label>
+                <input type="text" class="form-input" id="profName" placeholder="Nama kamu..." />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tagline</label>
+                <input type="text" class="form-input" id="profTagline" placeholder="Tagline website..." />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Kontak</label>
+                <input type="email" class="form-input" id="profEmail" placeholder="email@artspace.id" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Lokasi Studio</label>
+                <input type="text" class="form-input" id="profLoc" placeholder="cth: Jakarta Selatan" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Link Instagram</label>
+                <input type="url" class="form-input" id="profIG" placeholder="https://instagram.com/..." />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Link TikTok</label>
+                <input type="url" class="form-input" id="profTT" placeholder="https://tiktok.com/..." />
+              </div>
+            </div>
+            <div class="form-group" style="margin-top: 4px">
+              <label class="form-label">Bio / Statement Seni</label>
+              <textarea class="form-textarea" id="profBio" style="min-height: 140px" placeholder="Ceritakan dirimu..."></textarea>
+            </div>
+            <button class="btn-primary" onclick="saveProfile()" style="display: block; text-align: center">💾 Simpan Perubahan</button>
+          </div>
+        </div>
+      </div>
+      <!-- /.dash-body -->
+    </div>
+    <!-- /#admin-dashboard -->
+
+    <!-- Scripts: urutan penting! library dulu, lalu app.js, lalu admin.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+    <script src="admin.js"></script>
+    <script>
+      // Pada halaman admin.html, login langsung terbuka saat load
+      // Setelah doLogin() berhasil, dashboard akan muncul otomatis
+      // Tombol "Keluar" di admin.js perlu redirect ke index.html
+      // Override doLogout agar redirect ke index setelah logout
+      const _origDoLogout = doLogout;
+      async function doLogout() {
+        await sbClient.auth.signOut();
+        window.location.href = 'index.html';
+      }
+    </script>
+  </body>
+</html>
