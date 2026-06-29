@@ -190,6 +190,21 @@ nav {
   margin: 5px 0;
   image-rendering: pixelated;
 }
+/* Desktop */
+.mobile-admin {
+  display: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .nav-admin-btn {
+    display: none;
+  }
+
+  .mobile-admin {
+    display: block;
+  }
+}
 
 /* ============================================
    4. HERO
@@ -263,6 +278,8 @@ nav {
   position: relative;
   z-index: 1;
   display: flex;
+  gap: 3rem;
+  align-items: center;
   align-items: center;
   gap: 4rem;
   max-width: 1200px;
@@ -369,8 +386,9 @@ nav {
   position: relative;
 }
 .hero-avatar {
-  width: 400px;
-  height: 400px;
+  width: min(100%, 420px);
+  aspect-ratio: 1/1;
+  height: auto;
   background: var(--px-yellow);
   border: var(--pixel-border);
   box-shadow: var(--pixel-shadow-colored);
@@ -1006,7 +1024,7 @@ section {
   white-space: nowrap;
   letter-spacing: 4px;
   user-select: none;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* ============================================
@@ -1187,87 +1205,70 @@ section {
   background: var(--px-yellow);
 }
 /* Semua icon */
-.contact-icon{
-    transition:.35s;
-    overflow:hidden;
+.contact-icon {
+  transition: 0.35s;
+  overflow: hidden;
 }
 
-.contact-icon i{
-    transition:.35s;
+.contact-icon i {
+  transition: 0.35s;
 }
 
-.contact-item:hover .contact-icon{
-    transform:translateY(-5px) rotate(-5deg);
-    box-shadow:6px 6px 0 var(--px-ink);
+.contact-item:hover .contact-icon {
+  transform: translateY(-5px) rotate(-5deg);
+  box-shadow: 6px 6px 0 var(--px-ink);
 }
 
-.contact-item:hover .contact-icon i{
-    color:#fff;
+.contact-item:hover .contact-icon i {
+  color: #fff;
 }
-.email:hover .contact-icon{
-    background:linear-gradient(
-        135deg,
-        #4285F4 0%,
-        #34A853 35%,
-        #FBBC05 65%,
-        #EA4335 100%
-    );
+.email:hover .contact-icon {
+  background: linear-gradient(135deg, #4285f4 0%, #34a853 35%, #fbbc05 65%, #ea4335 100%);
 }
-.location:hover .contact-icon{
-    background:linear-gradient(
-        45deg,
-        #4285F4,
-        #34A853,
-        #FBBC05,
-        #EA4335
-    );
+.location:hover .contact-icon {
+  background: linear-gradient(45deg, #4285f4, #34a853, #fbbc05, #ea4335);
 }
-.clock:hover .contact-icon{
-    background:linear-gradient(
-        135deg,
-        #6a5cff,
-        #9d4edd,
-        #ff9d2e
-    );
+.clock:hover .contact-icon {
+  background: linear-gradient(135deg, #6a5cff, #9d4edd, #ff9d2e);
 }
 
-.contact-form-title{
-    font-size:1.5rem;
-    margin-bottom:22px;
-    font-family:inherit;
+.contact-form-title {
+  font-size: 1.5rem;
+  margin-bottom: 22px;
+  font-family: inherit;
 }
 
-.contact-notif{
-    margin-top:15px;
-    padding:12px 18px;
-    border:4px solid var(--px-ink);
-    box-shadow:5px 5px 0 var(--px-ink);
-    display:none;
-    font-weight:bold;
-    animation:pop .25s ease;
+.contact-notif {
+  margin-top: 15px;
+  padding: 12px 18px;
+  border: 4px solid var(--px-ink);
+  box-shadow: 5px 5px 0 var(--px-ink);
+  display: none;
+  font-weight: bold;
+  animation: pop 0.25s ease;
 }
 
-.contact-notif.success{
-    display:block;
-    background:#9cffb0;
-    color:#123;
+.contact-notif.success {
+  display: block;
+  background: #9cffb0;
+  color: #123;
 }
 
-.contact-notif.error{
-    display:block;
-    background:#ffb4b4;
-    color:#721c24;
+.contact-notif.error {
+  display: block;
+  background: #ffb4b4;
+  color: #721c24;
 }
 
-@keyframes pop{
-    from{
-        transform:scale(.8);
-        opacity:0;
-    }
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
+@keyframes pop {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 /* ============================================
    11. FOOTER
@@ -1818,10 +1819,16 @@ input[type='range'] {
 .slide-img {
   width: 100%;
   height: 260px;
-  object-fit: cover;
+
+  object-fit: contain;
+  object-position: center;
+
+  background: #000;
 
   border: 4px solid var(--px-ink);
   box-shadow: 4px 4px 0 var(--px-ink);
+
+  display: block;
 }
 
 .slide-title {
@@ -1918,146 +1925,130 @@ input[type='range'] {
   }
 }
 
-
 /* ===========================
    PIXEL POPUP
 =========================== */
 
-.pixel-popup{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
+.pixel-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    opacity:0;
-    visibility:hidden;
+  opacity: 0;
+  visibility: hidden;
 
-    transition:.25s;
+  transition: 0.25s;
 
-    z-index:9999;
+  z-index: 9999;
 }
 
-.pixel-popup.show{
-    opacity:1;
-    visibility:visible;
+.pixel-popup.show {
+  opacity: 1;
+  visibility: visible;
 }
 
-.pixel-popup-box{
+.pixel-popup-box {
+  width: 380px;
+  max-width: 90%;
 
-    width:380px;
-    max-width:90%;
+  background: #fff9ef;
 
-    background:#fff9ef;
+  border: 5px solid #1d1b38;
 
-    border:5px solid #1d1b38;
+  box-shadow: 10px 10px 0 #2d2859;
 
-    box-shadow:
-        10px 10px 0 #2d2859;
+  padding: 30px;
 
-    padding:30px;
+  text-align: center;
 
-    text-align:center;
-
-    animation:pixelPop .35s ease;
-
+  animation: pixelPop 0.35s ease;
 }
 
-.pixel-check{
+.pixel-check {
+  width: 90px;
+  height: 90px;
 
-    width:90px;
-    height:90px;
+  margin: auto;
 
-    margin:auto;
+  background: #5dd36f;
 
-    background:#5dd36f;
+  border: 5px solid #1d1b38;
 
-    border:5px solid #1d1b38;
+  box-shadow: 6px 6px 0 #2d2859;
 
-    box-shadow:6px 6px 0 #2d2859;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+  font-size: 42px;
 
-    font-size:42px;
+  color: white;
 
-    color:white;
-
-    margin-bottom:20px;
-
+  margin-bottom: 20px;
 }
 
-.pixel-popup h2{
+.pixel-popup h2 {
+  font-family: 'Press Start 2P', cursive;
 
-    font-family:'Press Start 2P', cursive;
+  font-size: 18px;
 
-    font-size:18px;
+  color: #1d1b38;
 
-    color:#1d1b38;
-
-    margin-bottom:18px;
-
+  margin-bottom: 18px;
 }
 
-.pixel-popup p{
+.pixel-popup p {
+  color: #555;
 
-    color:#555;
+  line-height: 1.8;
 
-    line-height:1.8;
-
-    margin-bottom:25px;
-
+  margin-bottom: 25px;
 }
 
-.pixel-popup button{
+.pixel-popup button {
+  border: none;
 
-    border:none;
+  background: #ff6fa9;
 
-    background:#ff6fa9;
+  color: white;
 
-    color:white;
+  font-weight: bold;
 
-    font-weight:bold;
+  padding: 12px 28px;
 
-    padding:12px 28px;
+  cursor: pointer;
 
-    cursor:pointer;
+  border: 4px solid #1d1b38;
 
-    border:4px solid #1d1b38;
+  box-shadow: 5px 5px 0 #2d2859;
 
-    box-shadow:5px 5px 0 #2d2859;
-
-    transition:.15s;
-
+  transition: 0.15s;
 }
 
-.pixel-popup button:hover{
+.pixel-popup button:hover {
+  transform: translate(-2px, -2px);
 
-    transform:translate(-2px,-2px);
-
-    box-shadow:7px 7px 0 #2d2859;
-
+  box-shadow: 7px 7px 0 #2d2859;
 }
 
-@keyframes pixelPop{
+@keyframes pixelPop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
 
-    0%{
-        transform:scale(.6);
-        opacity:0;
-    }
+  70% {
+    transform: scale(1.08);
+  }
 
-    70%{
-        transform:scale(1.08);
-    }
-
-    100%{
-        transform:scale(1);
-        opacity:1;
-    }
-
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 /* ============================================
    17. FITUR SUKA (LIKES)
@@ -2078,7 +2069,9 @@ input[type='range'] {
   font-size: 0.95rem;
   cursor: pointer;
   color: var(--px-ink);
-  transition: transform 0.1s, box-shadow 0.1s;
+  transition:
+    transform 0.1s,
+    box-shadow 0.1s;
 }
 .btn-like:hover {
   transform: translate(-2px, -2px);
@@ -2100,7 +2093,7 @@ input[type='range'] {
   position: absolute;
   top: 10px;
   left: 10px;
-  background: rgba(0,0,0,0.65);
+  background: rgba(0, 0, 0, 0.65);
   color: white;
   font-size: 0.75rem;
   font-weight: 800;
@@ -2122,4 +2115,165 @@ input[type='range'] {
   padding: 1px 7px;
   border-radius: 99px;
   vertical-align: middle;
+}
+
+/* ==========================
+   RESPONSIVE
+==========================*/
+
+@media (max-width: 1200px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-image-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-avatar {
+    width: min(90vw, 450px);
+  }
+
+  .hero-stats {
+    position: static;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .about-img {
+    margin: auto;
+  }
+
+  .contact-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .upload-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wm-editor {
+    grid-template-columns: 1fr;
+  }
+
+  .dash-stats {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .atable-head {
+    display: none;
+  }
+
+  .atable-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-image-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-avatar {
+    width: 95%;
+    max-width: 380px;
+    height: auto;
+    aspect-ratio: 1/1;
+    margin: 20px auto;
+  }
+
+  .hero-stats {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 95%;
+    margin-top: 15px;
+  }
+
+  .stat-card {
+    width: 100%;
+  }
+
+  nav {
+    width: 95%;
+    padding: 0 15px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-hamburger {
+    display: block;
+  }
+
+  .hero-title {
+    font-size: 1.6rem;
+  }
+
+  .hero-avatar {
+    width: 95vw;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    width: 96%;
+    max-height: 92vh;
+  }
+
+  .modal-image {
+    max-height: 45vh;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  .nav-admin-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.2rem;
+  }
+
+  .hero-avatar {
+    width: 100%;
+  }
+
+  .stat-card {
+    width: 100%;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
 }
