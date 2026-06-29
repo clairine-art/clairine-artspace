@@ -2,7 +2,7 @@ name: Keep Supabase Awake
 
 on:
   schedule:
-    # Setiap hari pukul 08:00 WIB
+    # Setiap hari pukul 08.00 WIB
     - cron: "0 1 * * *"
 
   workflow_dispatch:
@@ -17,7 +17,7 @@ jobs:
           curl --fail --silent --show-error \
           -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
-          "https://lssnarvapeddecidtsyzk.supabase.co/rest/v1/artworks?select=id&limit=1"
+          "https://lssnarvapedecidtsyzk.supabase.co/rest/v1/artworks?select=id&limit=1"
 
       - name: Success
         run: echo "Supabase Active ✅"
