@@ -50,11 +50,7 @@ function saveWm(w) {
 
 async function loadProfile() {
   try {
-    const { data, error } = await sbClient
-      .from('profiles')
-      .select('*')
-      .eq('id', 1)
-      .single();
+    const { data, error } = await sbClient.from('profiles').select('*').eq('id', 1).single();
 
     if (error || !data) {
       console.warn('loadProfile: pakai default', error?.message);
@@ -69,9 +65,7 @@ async function loadProfile() {
 }
 
 async function saveProfileData(p) {
-  const { error } = await sbClient
-    .from('profiles')
-    .upsert({ id: 1, ...p }, { onConflict: 'id' });
+  const { error } = await sbClient.from('profiles').upsert({ id: 1, ...p }, { onConflict: 'id' });
 
   if (error) {
     console.error('saveProfileData:', error.message);
@@ -165,7 +159,17 @@ async function openModal(id) {
 
   const modalImg = document.getElementById('modalEmoji');
   if (a.image) {
-    modalImg.innerHTML = `<img src="${a.image}" alt="${a.title}" style="width:100%;height:100%;object-fit:cover;display:block;">`;
+    modalImg.innerHTML = `
+<img src="${a.image}"
+style="
+width:100%;
+height:100%;
+object-fit:contain;
+object-position:center;
+display:block;
+background:#000;
+">
+`;
   } else {
     modalImg.innerHTML = '';
     modalImg.textContent = '🖼️';
@@ -378,4 +382,27 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.addEventListener('contextmenu', (e) => e.preventDefault());
 document.addEventListener('dragstart', (e) => {
   if (e.target.tagName === 'IMG') e.preventDefault();
+});
+
+
+// Smooth Scroll Navigation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const target = document.querySelector(this.getAttribute("href"));
+
+    if (!target) return;
+
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+    // Tutup menu mobile setelah klik
+    if (window.innerWidth <= 768) {
+      document.querySelector(".nav-links")?.classList.remove("active");
+      document.getElementById("hamburgerBtn")?.classList.remove("active");
+    }
+  });
 });
