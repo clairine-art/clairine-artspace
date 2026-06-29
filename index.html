@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>clairine Artspace — Portofolio Pelukis</title>
 
+    <link rel="icon" type="image/png" href="media/profil/logo.png">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-
-
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css" />
@@ -22,14 +22,29 @@
 ==================================================== -->
     <nav id="mainNav">
       <div class="nav-logo">Clairine Artspace</div>
+
       <ul class="nav-links">
         <li><a href="#hero">Beranda</a></li>
         <li><a href="#about">Tentang</a></li>
         <li><a href="#gallery">Galeri</a></li>
         <li><a href="#contact">Kontak</a></li>
+
+        <!-- Muncul hanya di mobile -->
+        <li class="mobile-admin">
+          <a href="admin.html">
+            <i class="fa-solid fa-lock"></i>
+            Dashboard Admin
+          </a>
+        </li>
       </ul>
-      <button class="nav-admin-btn" onclick="window.location.href='admin.html'">Dashboard Admin</button>
-      <button class="nav-hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+
+      <button class="nav-admin-btn" onclick="window.location.href = 'admin.html'">Dashboard Admin</button>
+
+      <button class="nav-hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </nav>
 
     <!-- ===================================================
@@ -262,9 +277,9 @@
     <div class="modal-overlay" id="artworkModal" onclick="closeModalOnBg(event)">
       <div class="modal" id="artworkModalContent">
         <div class="modal-header" id="modalHeader">
-          <div id="modalEmoji" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:6rem;pointer-events:none;">🖼️</div>
+          <div id="modalEmoji" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 6rem; pointer-events: none">🖼️</div>
           <div class="modal-wm-overlay"><span id="modalWmText">© Clairine-art</span></div>
-          <button class="modal-close" onclick="closeModal()" style="pointer-events:all;z-index:200;">✕</button>
+          <button class="modal-close" onclick="closeModal()" style="pointer-events: all; z-index: 200">✕</button>
         </div>
         <div class="modal-body">
           <div class="modal-cat" id="modalCat">LUKISAN</div>
